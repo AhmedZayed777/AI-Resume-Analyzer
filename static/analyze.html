@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analyze resume — AI Resume Analyzer</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/index.html">AI Resume Analyzer</a>
+    <nav>
+      <a href="/analyze.html">Analyze</a>
+      <a href="/jobs.html">Jobs</a>
+      <a href="/advisor.html">Advisor</a>
+      <span id="auth-area"></span>
+    </nav>
+  </header>
+  <main class="container">
+    <div class="card">
+      <h2>Upload a resume</h2>
+      <p class="muted">PDF or DOCX, up to 5 MB. Your file is parsed locally — skills, education and experience are extracted by the analyzer agent.</p>
+      <div class="error-box" id="error-box"></div>
+      <div class="dropzone" id="dropzone">
+        Drag &amp; drop your resume here, or <label for="file" style="color:var(--accent);cursor:pointer">browse</label>
+        <input type="file" id="file" accept=".pdf,.docx" hidden>
+      </div>
+      <p id="upload-status" class="muted"></p>
+    </div>
+
+    <div id="results" style="display:none">
+      <h2 class="section-title">Analysis</h2>
+      <div class="grid cols-3">
+        <div class="card"><h3>Summary</h3><p id="summary" class="muted"></p></div>
+        <div class="card"><h3>Profile</h3><p class="muted"><span id="profile-name"></span><br><span id="profile-email"></span><br><span id="profile-years"></span></p></div>
+        <div class="card"><h3>Experience</h3><ul id="experience" class="muted"></ul></div>
+      </div>
+      <div class="grid cols-3" style="margin-top:1rem">
+        <div class="card"><h3>Technical skills</h3><div class="chips" id="tech-skills"></div></div>
+        <div class="card"><h3>Soft skills</h3><div class="chips" id="soft-skills"></div></div>
+        <div class="card"><h3>Education</h3><ul id="education" class="muted"></ul></div>
+      </div>
+      <div class="grid" style="margin-top:1rem; grid-template-columns:1fr 1fr">
+        <div class="card"><h3>Strengths</h3><ul id="strengths"></ul></div>
+        <div class="card"><h3>Weaknesses</h3><ul id="weaknesses"></ul></div>
+      </div>
+
+      <h2 class="section-title">Recommended jobs</h2>
+      <div id="matches" class="grid"></div>
+
+      <h2 class="section-title">Improve this resume</h2>
+      <div class="card">
+        <form id="improve-form" class="chat-form">
+          <input type="text" id="target-role" placeholder="Target role, e.g. Backend Developer" required minlength="2">
+          <button class="btn btn-primary" type="submit">Get plan</button>
+        </form>
+        <div id="improve-plan" style="display:none; margin-top:1rem"></div>
+      </div>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/analyze.js"></script>
+</body>
+</html>

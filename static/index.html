@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Resume Analyzer</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/index.html">AI Resume Analyzer</a>
+    <nav>
+      <a href="/analyze.html">Analyze</a>
+      <a href="/jobs.html">Jobs</a>
+      <a href="/advisor.html">Advisor</a>
+      <span id="auth-area"></span>
+    </nav>
+  </header>
+  <main class="container">
+    <section class="hero">
+      <h1>Analyze your resume. Land the right job.</h1>
+      <p>Upload a resume and let AI agents extract your skills, score you against jobs,
+         suggest improvements, and answer career questions from a curated knowledge base.</p>
+      <a class="btn btn-primary" href="/analyze.html">Upload a resume</a>
+      <a class="btn" href="/jobs.html">Browse jobs</a>
+    </section>
+    <section class="grid cols-3">
+      <div class="card"><h3>1. Resume analysis</h3><p class="muted">Skills, education, experience, strengths and weaknesses — extracted automatically.</p></div>
+      <div class="card"><h3>2. Job matching</h3><p class="muted">Match score out of 100 with an explanation and the exact skills you're missing.</p></div>
+      <div class="card"><h3>3. Career advice</h3><p class="muted">Improvement plans and answers grounded in roadmaps, certifications and resources.</p></div>
+    </section>
+    <h2 class="section-title">Your recent resumes</h2>
+    <div id="recent-resumes" class="grid"></div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    window.initPage = async () => {
+      const box = document.getElementById('recent-resumes');
+      try {
+        const resumes = await request('/api/resumes');
+        if (!resumes.length) {
+          box.innerHTML = '<div class="empty">No resumes yet — <a href="/analyze.html">upload your first one</a>.</div>';
+          return;
+        }
+        box.innerHTML = resumes.slice(0, 5).map(r => `
+          <div class="card list-item">
+            <div><strong>${escapeHtml(r.filename)}</strong>
+              <div class="muted">${escapeHtml(r.full_name || 'Unknown')} · ${escapeHtml(r.uploaded_at)}</div></div>
+            <a class="btn btn-sm" href="/analyze.html?resume=${r.id}">View</a>
+          </div>`).join('');
+      } catch (e) {
+        box.innerHTML = `<div class="empty">${escapeHtml(e.message)}</div>`;
+      }
+    };
+  </script>
+</body>
+</html>

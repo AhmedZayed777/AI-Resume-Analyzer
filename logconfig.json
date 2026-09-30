@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "disable_existing_loggers": false,
+  "formatters": {
+    "default": {"format": "%(asctime)s %(levelname)s %(name)s %(message)s"}
+  },
+  "handlers": {
+    "file": {
+      "class": "logging.FileHandler",
+      "filename": "uvicorn.log",
+      "formatter": "default",
+      "encoding": "utf-8"
+    },
+    "null": {"class": "logging.NullHandler"}
+  },
+  "loggers": {
+    "uvicorn": {"handlers": ["file"], "level": "INFO", "propagate": false},
+    "uvicorn.error": {"handlers": ["file"], "level": "INFO", "propagate": false},
+    "uvicorn.access": {"handlers": ["null"], "level": "WARNING", "propagate": false}
+  }
+}

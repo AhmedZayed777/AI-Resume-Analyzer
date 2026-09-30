@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jobs — AI Resume Analyzer</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/index.html">AI Resume Analyzer</a>
+    <nav>
+      <a href="/analyze.html">Analyze</a>
+      <a href="/jobs.html">Jobs</a>
+      <a href="/advisor.html">Advisor</a>
+      <span id="auth-area"></span>
+    </nav>
+  </header>
+  <main class="container">
+    <div class="card">
+      <form id="search-form" class="chat-form">
+        <input type="text" id="q" placeholder="Search title, company, description…">
+        <input type="text" id="location" placeholder="Location">
+        <input type="text" id="skill" placeholder="Skill, e.g. Python">
+        <button class="btn btn-primary" type="submit">Search</button>
+        <button class="btn" type="button" id="reset-btn">Reset</button>
+      </form>
+      <button class="btn btn-primary" id="new-job-btn" style="margin-top:.8rem; display:none">+ Add job</button>
+    </div>
+    <div id="jobs" class="grid" style="margin-top:1rem"></div>
+  </main>
+
+  <div class="modal-backdrop" id="job-modal">
+    <div class="modal">
+      <h3 id="modal-title">Add job</h3>
+      <div class="error-box" id="error-box"></div>
+      <form id="job-form">
+        <input type="hidden" id="job-id">
+        <div class="form-row"><label for="title">Title *</label><input id="title" name="title" required minlength="2" maxlength="200"></div>
+        <div class="form-row"><label for="company">Company</label><input id="company" name="company" maxlength="200"></div>
+        <div class="form-row"><label for="jlocation">Location</label><input id="jlocation" name="location" maxlength="200"></div>
+        <div class="form-row"><label for="description">Description</label><textarea id="description" name="description" rows="4" maxlength="5000"></textarea></div>
+        <div class="form-row"><label for="skills">Required skills (comma separated)</label><input id="skills" name="skills" placeholder="Python, FastAPI, SQL"></div>
+        <div class="form-row"><label for="years">Minimum years of experience</label><input id="years" name="years" type="number" min="0" max="50" step="0.5" value="0"></div>
+        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn" type="button" id="cancel-btn">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/jobs.js"></script>
+</body>
+</html>

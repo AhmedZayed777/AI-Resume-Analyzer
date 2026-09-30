@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in — AI Resume Analyzer</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/index.html">AI Resume Analyzer</a>
+    <nav><span id="auth-area"></span></nav>
+  </header>
+  <main class="container">
+    <div class="card auth-card">
+      <h2>Log in</h2>
+      <div class="error-box" id="error-box"></div>
+      <form id="login-form">
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password">
+        </div>
+        <button class="btn btn-primary" type="submit">Log in</button>
+      </form>
+      <p class="muted">No account? <a href="/register.html">Sign up</a> — or use the demo:
+        demo@example.com / demo12345</p>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>
